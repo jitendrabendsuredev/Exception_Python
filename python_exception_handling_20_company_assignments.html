@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Exception Handling — 20 Company Assignments</title>
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--ink:#172033;--muted:#647084;--line:#dce3ee;
+  --accent:#3157d5;--green:#12856f;--soft:#eef3ff;--soft2:#edfbf7;
+  --orange:#d97706;--red:#b42318;--code:#0f172a
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.container{max-width:1450px;margin:auto;padding:24px}
+.hero{
+  background:linear-gradient(135deg,#fff,#edf3ff);
+  border:1px solid var(--line);border-radius:24px;padding:36px;
+  box-shadow:0 14px 40px rgba(30,50,85,.08)
+}
+.hero h1{font-size:clamp(34px,5vw,62px);margin:0 0 10px}
+.hero p{font-size:clamp(19px,2vw,27px);color:var(--muted);margin:8px 0}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--soft);color:var(--accent);font-weight:800;margin:8px 8px 0 0}
+.nav{
+  position:sticky;top:0;z-index:20;background:rgba(247,249,252,.96);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  padding:10px 0;display:flex;gap:8px;flex-wrap:wrap
+}
+.nav a{
+  text-decoration:none;color:var(--accent);background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:8px 11px;font-weight:800
+}
+.section{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;
+  padding:30px;margin:24px 0;box-shadow:0 12px 32px rgba(30,50,85,.06)
+}
+.section h2{font-size:clamp(28px,3.5vw,46px);margin:0 0 16px}
+.assignment{
+  border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;background:#fcfdff
+}
+.assignment h3{font-size:clamp(22px,2.4vw,31px);margin:0 0 8px;color:#23395d}
+p,li{font-size:clamp(18px,1.5vw,23px)}
+.focus{
+  display:inline-block;background:var(--soft);color:var(--accent);
+  border-radius:999px;padding:6px 11px;font-weight:800;font-size:15px;margin:4px 5px 8px 0
+}
+.focus.red{background:#fff0ef;color:var(--red)}
+.focus.green{background:#e9faf5;color:var(--green)}
+button{
+  border:0;border-radius:10px;padding:10px 15px;font-size:16px;
+  font-weight:800;cursor:pointer;color:#fff;background:var(--accent);margin:8px 8px 0 0
+}
+button.orange{background:var(--orange)}
+.hidden{display:none}
+.box{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+pre{
+  background:var(--code);color:#e8eefc;padding:18px;border-radius:14px;
+  overflow:auto;font-size:16px;line-height:1.5
+}
+code{font-family:"Cascadia Code",Consolas,monospace}
+.callout{
+  border-left:6px solid var(--green);background:var(--soft2);padding:18px 20px;
+  border-radius:12px;margin:18px 0;font-size:clamp(18px,1.5vw,23px)
+}
+.note{
+  border-left:6px solid var(--accent);background:#f3f6ff;padding:16px 18px;
+  border-radius:12px;margin:14px 0;font-size:clamp(17px,1.4vw,21px)
+}
+.footer{text-align:center;color:var(--muted);padding:18px;font-size:16px}
+@media(max-width:700px){.container{padding:12px}.hero,.section{padding:22px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="hero">
+  <h1>Python Exception Handling — 20 Company Assignments</h1>
+  <p>Real Business Scenarios · Fresher Interview Practice · </p>
+  
+</section>
+
+<div class="nav">
+  <a href="#basic">Basic Validation</a>
+  <a href="#business">Business Rules</a>
+  <a href="#files">Files & Data</a>
+  <a href="#advanced">Raise & Custom</a>
+  <a href="#mixed">Mixed Company Tasks</a>
+</div>
+
+<section class="section" id="basic">
+<h2>Part 1 — Basic Exception Handling</h2>
+
+<div class="assignment">
+<h3>1. Employee Age Registration</h3>
+<span class="focus">ValueError</span><span class="focus">try-except</span>
+<p>HR software accepts employee age from the user. If the user enters text such as <b>"twenty five"</b>, the system should not crash. Show a proper message.</p>
+<div class="note"><b>Company Requirement:</b> Application must continue gracefully even when invalid numeric input is entered.</div>
+<button onclick="toggle('h1')">Show Hint</button>
+<button class="orange" onclick="toggle('s1')">Show Solution</button>
+<div class="box hidden" id="h1">Convert input using <b>int()</b> inside a try block and handle <b>ValueError</b>.</div>
+<div class="box hidden" id="s1"><pre><code>try:
+    age = int(input("Enter employee age: "))
+    print("Employee age:", age)
+
+except ValueError:
+    print("Invalid age. Please enter numbers only.")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>2. Payroll Division Calculator</h3>
+<span class="focus">ZeroDivisionError</span><span class="focus">ValueError</span>
+<p>A payroll team calculates salary per working day using <code>salary / working_days</code>. Handle invalid salary input and zero working days.</p>
+<button onclick="toggle('h2')">Show Hint</button>
+<button class="orange" onclick="toggle('s2')">Show Solution</button>
+<div class="box hidden" id="h2">Use separate except blocks for <b>ValueError</b> and <b>ZeroDivisionError</b>.</div>
+<div class="box hidden" id="s2"><pre><code>try:
+    salary = float(input("Enter salary: "))
+    working_days = int(input("Enter working days: "))
+
+    per_day = salary / working_days
+    print("Salary per day:", per_day)
+
+except ValueError:
+    print("Please enter valid numeric values.")
+
+except ZeroDivisionError:
+    print("Working days cannot be zero.")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>3. Product Price Entry</h3>
+<span class="focus">ValueError</span><span class="focus green">else</span>
+<p>An inventory employee enters a product price. If the price is valid, display <b>"Price saved successfully"</b>. Otherwise show an error.</p>
+<button onclick="toggle('h3')">Show Hint</button>
+<button class="orange" onclick="toggle('s3')">Show Solution</button>
+<div class="box hidden" id="h3">Put success code inside the <b>else</b> block.</div>
+<div class="box hidden" id="s3"><pre><code>try:
+    price = float(input("Enter product price: "))
+
+except ValueError:
+    print("Invalid price.")
+
+else:
+    print("Price saved successfully:", price)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>4. Customer List Search</h3>
+<span class="focus">IndexError</span>
+<p>A support employee searches a customer by list position. If an invalid index is entered, the application should show <b>"Customer position not found"</b>.</p>
+<button onclick="toggle('h4')">Show Hint</button>
+<button class="orange" onclick="toggle('s4')">Show Solution</button>
+<div class="box hidden" id="h4">Access the list index inside try and handle <b>IndexError</b>.</div>
+<div class="box hidden" id="s4"><pre><code>customers = ["Amit", "Riya", "Karan", "Neha"]
+
+try:
+    index = int(input("Enter customer index: "))
+    print("Customer:", customers[index])
+
+except ValueError:
+    print("Index must be a number.")
+
+except IndexError:
+    print("Customer position not found.")</code></pre></div>
+</div>
+</section>
+
+<section class="section" id="business">
+<h2>Part 2 — Business Rule Scenarios</h2>
+
+<div class="assignment">
+<h3>5. E-Commerce Discount Validation</h3>
+<span class="focus red">raise</span><span class="focus">ValueError</span>
+<p>An e-commerce system accepts discount percentage. Company policy allows only <b>0% to 50%</b>. Raise an exception for invalid discount.</p>
+<button onclick="toggle('h5')">Show Hint</button>
+<button class="orange" onclick="toggle('s5')">Show Solution</button>
+<div class="box hidden" id="h5">Use <b>raise ValueError()</b> when discount is below 0 or above 50.</div>
+<div class="box hidden" id="s5"><pre><code>try:
+    discount = float(input("Enter discount percentage: "))
+
+    if discount &lt; 0 or discount &gt; 50:
+        raise ValueError("Discount must be between 0 and 50")
+
+    print("Discount accepted:", discount, "%")
+
+except ValueError as e:
+    print("Error:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>6. Banking Withdrawal Validation</h3>
+<span class="focus red">raise</span><span class="focus">Business Rule</span>
+<p>A banking system has balance ₹10,000. Withdrawal amount must be greater than zero and must not exceed balance.</p>
+<button onclick="toggle('h6')">Show Hint</button>
+<button class="orange" onclick="toggle('s6')">Show Solution</button>
+<div class="box hidden" id="h6">Raise a <b>ValueError</b> for invalid withdrawal conditions.</div>
+<div class="box hidden" id="s6"><pre><code>balance = 10000
+
+try:
+    amount = float(input("Enter withdrawal amount: "))
+
+    if amount &lt;= 0:
+        raise ValueError("Amount must be greater than zero")
+
+    if amount &gt; balance:
+        raise ValueError("Insufficient balance")
+
+    balance -= amount
+    print("Withdrawal successful")
+    print("Remaining balance:", balance)
+
+except ValueError as e:
+    print("Transaction failed:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>7. Employee Salary Validation</h3>
+<span class="focus red">raise</span>
+<p>HR system should reject salary values below ₹10,000. Accept employee salary and raise an exception if company minimum salary policy is violated.</p>
+<button onclick="toggle('h7')">Show Hint</button>
+<button class="orange" onclick="toggle('s7')">Show Solution</button>
+<div class="box hidden" id="h7">Use a manual condition followed by <b>raise ValueError()</b>.</div>
+<div class="box hidden" id="s7"><pre><code>try:
+    salary = float(input("Enter salary: "))
+
+    if salary &lt; 10000:
+        raise ValueError("Salary cannot be below company minimum")
+
+    print("Salary accepted:", salary)
+
+except ValueError as e:
+    print("Validation Error:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>8. Stock Order Validation</h3>
+<span class="focus red">raise</span><span class="focus">Inventory</span>
+<p>A warehouse has 50 units of a product. Reject orders with quantity less than or equal to zero or greater than available stock.</p>
+<button onclick="toggle('h8')">Show Hint</button>
+<button class="orange" onclick="toggle('s8')">Show Solution</button>
+<div class="box hidden" id="h8">Check order quantity before reducing stock.</div>
+<div class="box hidden" id="s8"><pre><code>stock = 50
+
+try:
+    qty = int(input("Enter order quantity: "))
+
+    if qty &lt;= 0:
+        raise ValueError("Quantity must be greater than zero")
+
+    if qty &gt; stock:
+        raise ValueError("Not enough stock available")
+
+    stock -= qty
+    print("Order confirmed")
+    print("Remaining stock:", stock)
+
+except ValueError as e:
+    print("Order failed:", e)</code></pre></div>
+</div>
+</section>
+
+<section class="section" id="files">
+<h2>Part 3 — Files, Records & Data Handling</h2>
+
+<div class="assignment">
+<h3>9. Employee File Reader</h3>
+<span class="focus">FileNotFoundError</span>
+<p>HR software tries to read <code>employees.txt</code>. If the file does not exist, display a friendly message instead of crashing.</p>
+<button onclick="toggle('h9')">Show Hint</button>
+<button class="orange" onclick="toggle('s9')">Show Solution</button>
+<div class="box hidden" id="h9">Use <b>open()</b> inside try and catch <b>FileNotFoundError</b>.</div>
+<div class="box hidden" id="s9"><pre><code>try:
+    file = open("employees.txt", "r")
+    print(file.read())
+    file.close()
+
+except FileNotFoundError:
+    print("Employee file not found.")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>10. Invoice File with finally</h3>
+<span class="focus">finally</span><span class="focus">File Handling</span>
+<p>An accounts application reads an invoice file. Whether reading succeeds or fails, print <b>"Invoice operation completed"</b>.</p>
+<button onclick="toggle('h10')">Show Hint</button>
+<button class="orange" onclick="toggle('s10')">Show Solution</button>
+<div class="box hidden" id="h10">Put the final status message inside <b>finally</b>.</div>
+<div class="box hidden" id="s10"><pre><code>try:
+    file = open("invoice.txt", "r")
+    print(file.read())
+    file.close()
+
+except FileNotFoundError:
+    print("Invoice file not found.")
+
+finally:
+    print("Invoice operation completed.")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>11. Employee Dictionary Search</h3>
+<span class="focus">KeyError</span>
+<p>An HR dictionary stores employee data. Ask for a field such as <b>name</b>, <b>department</b>, or <b>salary</b>. Handle an invalid key.</p>
+<button onclick="toggle('h11')">Show Hint</button>
+<button class="orange" onclick="toggle('s11')">Show Solution</button>
+<div class="box hidden" id="h11">Access <code>employee[key]</code> inside try.</div>
+<div class="box hidden" id="s11"><pre><code>employee = {
+    "name": "Amit",
+    "department": "IT",
+    "salary": 35000
+}
+
+try:
+    key = input("Enter field name: ")
+    print(employee[key])
+
+except KeyError:
+    print("Requested employee field does not exist.")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>12. Sales Data Conversion</h3>
+<span class="focus">ValueError</span><span class="focus">Data Cleaning</span>
+<p>A sales file provides amount as text. Convert <code>"45000"</code> to integer, but safely handle values such as <code>"45k"</code>.</p>
+<button onclick="toggle('h12')">Show Hint</button>
+<button class="orange" onclick="toggle('s12')">Show Solution</button>
+<div class="box hidden" id="h12">Use <b>int()</b> inside try.</div>
+<div class="box hidden" id="s12"><pre><code>sales_amount = input("Enter sales amount: ")
+
+try:
+    amount = int(sales_amount)
+    print("Clean sales amount:", amount)
+
+except ValueError:
+    print("Invalid sales amount format.")</code></pre></div>
+</div>
+</section>
+
+<section class="section" id="advanced">
+<h2>Part 4 — Custom Exceptions & Advanced Business Rules</h2>
+
+<div class="assignment">
+<h3>13. Custom InsufficientBalanceError</h3>
+<span class="focus red">Custom Exception</span>
+<p>Create a custom exception named <code>InsufficientBalanceError</code>. Raise it when withdrawal amount is greater than account balance.</p>
+<button onclick="toggle('h13')">Show Hint</button>
+<button class="orange" onclick="toggle('s13')">Show Solution</button>
+<div class="box hidden" id="h13">Create a class that inherits from <b>Exception</b>.</div>
+<div class="box hidden" id="s13"><pre><code>class InsufficientBalanceError(Exception):
+    pass
+
+balance = 5000
+
+try:
+    amount = float(input("Enter withdrawal amount: "))
+
+    if amount &gt; balance:
+        raise InsufficientBalanceError("Insufficient account balance")
+
+    balance -= amount
+    print("Transaction successful")
+
+except InsufficientBalanceError as e:
+    print("Transaction failed:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>14. Custom InvalidLeaveError</h3>
+<span class="focus red">Custom Exception</span><span class="focus">HR</span>
+<p>An employee can apply for maximum 10 leave days at once. Create <code>InvalidLeaveError</code> for values below 1 or above 10.</p>
+<button onclick="toggle('h14')">Show Hint</button>
+<button class="orange" onclick="toggle('s14')">Show Solution</button>
+<div class="box hidden" id="h14">Raise custom exception if leave days are outside 1–10.</div>
+<div class="box hidden" id="s14"><pre><code>class InvalidLeaveError(Exception):
+    pass
+
+try:
+    days = int(input("Enter leave days: "))
+
+    if days &lt; 1 or days &gt; 10:
+        raise InvalidLeaveError("Leave must be between 1 and 10 days")
+
+    print("Leave request submitted")
+
+except ValueError:
+    print("Enter leave days in numbers.")
+
+except InvalidLeaveError as e:
+    print("Leave rejected:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>15. Custom CreditLimitError</h3>
+<span class="focus red">Custom Exception</span><span class="focus">Finance</span>
+<p>A company customer has a credit limit of ₹1,00,000. Raise <code>CreditLimitError</code> when a new invoice exceeds the limit.</p>
+<button onclick="toggle('h15')">Show Hint</button>
+<button class="orange" onclick="toggle('s15')">Show Solution</button>
+<div class="box hidden" id="h15">Compare invoice amount with credit limit.</div>
+<div class="box hidden" id="s15"><pre><code>class CreditLimitError(Exception):
+    pass
+
+credit_limit = 100000
+
+try:
+    invoice = float(input("Enter invoice amount: "))
+
+    if invoice &gt; credit_limit:
+        raise CreditLimitError("Customer credit limit exceeded")
+
+    print("Invoice approved")
+
+except ValueError:
+    print("Invalid invoice amount.")
+
+except CreditLimitError as e:
+    print("Invoice rejected:", e)</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>16. Custom ProductOutOfStockError</h3>
+<span class="focus red">Custom Exception</span><span class="focus">Warehouse</span>
+<p>Create a custom exception for an order that requests more quantity than available inventory.</p>
+<button onclick="toggle('h16')">Show Hint</button>
+<button class="orange" onclick="toggle('s16')">Show Solution</button>
+<div class="box hidden" id="h16">Create <code>ProductOutOfStockError(Exception)</code>.</div>
+<div class="box hidden" id="s16"><pre><code>class ProductOutOfStockError(Exception):
+    pass
+
+stock = 20
+
+try:
+    qty = int(input("Enter quantity: "))
+
+    if qty &gt; stock:
+        raise ProductOutOfStockError("Requested quantity is not available")
+
+    stock -= qty
+    print("Order processed")
+    print("Remaining stock:", stock)
+
+except ValueError:
+    print("Quantity must be numeric.")
+
+except ProductOutOfStockError as e:
+    print("Order failed:", e)</code></pre></div>
+</div>
+</section>
+
+<section class="section" id="mixed">
+<h2>Part 5 — Company-Level Mixed Assignments</h2>
+
+<div class="assignment">
+<h3>17. Online Payment Processor</h3>
+<span class="focus">try-except-else-finally</span><span class="focus">Payment</span>
+<p>Create a payment program that accepts amount. Amount must be numeric and greater than zero. On success show payment confirmation. Always print <b>"Payment request completed"</b>.</p>
+<button onclick="toggle('h17')">Show Hint</button>
+<button class="orange" onclick="toggle('s17')">Show Solution</button>
+<div class="box hidden" id="h17">Use <b>try + except + else + finally</b>.</div>
+<div class="box hidden" id="s17"><pre><code>try:
+    amount = float(input("Enter payment amount: "))
+
+    if amount &lt;= 0:
+        raise ValueError("Amount must be greater than zero")
+
+except ValueError as e:
+    print("Payment failed:", e)
+
+else:
+    print("Payment successful:", amount)
+
+finally:
+    print("Payment request completed")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>18. Employee Login Attempt</h3>
+<span class="focus red">raise</span><span class="focus">Authentication Logic</span>
+<p>Company username is <code>admin</code> and password is <code>python123</code>. Raise an exception if credentials are wrong.</p>
+<button onclick="toggle('h18')">Show Hint</button>
+<button class="orange" onclick="toggle('s18')">Show Solution</button>
+<div class="box hidden" id="h18">You may raise a generic <b>Exception</b> or <b>ValueError</b> for invalid credentials.</div>
+<div class="box hidden" id="s18"><pre><code>try:
+    username = input("Username: ")
+    password = input("Password: ")
+
+    if username != "admin" or password != "python123":
+        raise ValueError("Invalid username or password")
+
+except ValueError as e:
+    print("Login failed:", e)
+
+else:
+    print("Login successful")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>19. Order Billing System</h3>
+<span class="focus">Multiple Exceptions</span><span class="focus">Billing</span>
+<p>A billing system accepts product price and quantity. Handle invalid numeric input. Reject zero or negative quantity. Calculate total only when all data is valid.</p>
+<button onclick="toggle('h19')">Show Hint</button>
+<button class="orange" onclick="toggle('s19')">Show Solution</button>
+<div class="box hidden" id="h19">Use ValueError for conversion and also manually raise ValueError for invalid quantity.</div>
+<div class="box hidden" id="s19"><pre><code>try:
+    price = float(input("Enter product price: "))
+    qty = int(input("Enter quantity: "))
+
+    if qty &lt;= 0:
+        raise ValueError("Quantity must be greater than zero")
+
+    total = price * qty
+
+except ValueError as e:
+    print("Billing error:", e)
+
+else:
+    print("Final Bill:", total)
+
+finally:
+    print("Billing process completed")</code></pre></div>
+</div>
+
+<div class="assignment">
+<h3>20. Mini Project — Company Order Processing</h3>
+<span class="focus">Final Challenge</span>
+<span class="focus red">raise</span>
+<span class="focus red">Custom Exception</span>
+<span class="focus">else</span>
+<span class="focus">finally</span>
+<p>Create a small company order system with the following rules:</p>
+<ul>
+  <li>Available stock = 100 units.</li>
+  <li>Product price = ₹500 per unit.</li>
+  <li>User enters quantity.</li>
+  <li>Quantity must be numeric and greater than zero.</li>
+  <li>If quantity exceeds stock, raise a custom <code>StockError</code>.</li>
+  <li>On successful order, calculate total bill and remaining stock.</li>
+  <li>Always print <b>"Order request completed"</b>.</li>
+</ul>
+<button onclick="toggle('h20')">Show Hint</button>
+<button class="orange" onclick="toggle('s20')">Show Solution</button>
+<div class="box hidden" id="h20">Use custom exception + ValueError + else + finally.</div>
+<div class="box hidden" id="s20"><pre><code>class StockError(Exception):
+    pass
+
+stock = 100
+price = 500
+
+try:
+    qty = int(input("Enter order quantity: "))
+
+    if qty &lt;= 0:
+        raise ValueError("Quantity must be greater than zero")
+
+    if qty &gt; stock:
+        raise StockError("Requested stock is not available")
+
+    total = qty * price
+    stock -= qty
+
+except ValueError as e:
+    print("Invalid input:", e)
+
+except StockError as e:
+    print("Order rejected:", e)
+
+else:
+    print("Order confirmed")
+    print("Total Bill:", total)
+    print("Remaining Stock:", stock)
+
+finally:
+    print("Order request completed")</code></pre></div>
+</div>
+
+<div class="callout">
+<b>Teacher Flow:</b> First show only the business problem → ask students which exception can occur → ask which block is needed → let them code → open Hint only if needed → finally open Solution and discuss why that exception was selected.
+</div>
+</section>
+
+<div class="footer">
+Python Exception Handling · 20 Company Assignments · Business Scenario Practice
+</div>
+
+</div>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle("hidden");
+}
+</script>
+</body>
+</html>
